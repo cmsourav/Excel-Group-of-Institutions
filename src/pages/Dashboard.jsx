@@ -53,7 +53,7 @@ const Dashboard = () => {
 
         // Fetch students created by the logged-in user
         const studentSnapshot = await getDocs(
-          query(collection(db, "shanmugha"), where("createdBy", "==", user.uid))
+          query(collection(db, "excel"), where("createdBy", "==", user.uid))
         );
 
         const studentList = studentSnapshot.docs.map((doc) => ({

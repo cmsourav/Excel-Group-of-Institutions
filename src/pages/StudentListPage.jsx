@@ -32,7 +32,7 @@ const StudentList = () => {
       try {
         setIsLoading(true);
         const q = query(
-          collection(db, "shanmugha"),
+          collection(db, "excel"),
           where("createdBy", "==", user.uid)
         );
         const snapshot = await getDocs(q);
@@ -76,19 +76,20 @@ const StudentList = () => {
   }, []);
 
   // Filter and pagination logic
-  const filteredStudents = useMemo(() => {
-    let filtered = students;
-    if (searchTerm) {
-      filtered = filtered.filter((s) =>
-        s.candidateName?.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-    if (statusFilter) {
-      filtered = filtered.filter((s) => s.applicationStatus === statusFilter);
-    }
-    setCurrentPage(1);
-    return filtered;
-  }, [students, searchTerm, statusFilter]);
+ const filteredStudents = useMemo(() => {
+  let filtered = students;
+  if (searchTerm) {
+    filtered = filtered.filter((s) =>
+      s.candidateName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      s.studentId?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+  if (statusFilter) {
+    filtered = filtered.filter((s) => s.applicationStatus === statusFilter);
+  }
+  setCurrentPage(1);
+  return filtered;
+}, [students, searchTerm, statusFilter]);
 
   const currentStudents = useMemo(() => {
     const startIndex = (currentPage - 1) * studentsPerPage;
@@ -169,7 +170,7 @@ const EditModal = ({ selectedStudent, setShowEditModal, isSaving }) => {
   useEffect(() => {
     const fetchColleges = async () => {
       try {
-        const snapshot = await getDocs(collection(db, "colleges"));
+        const snapshot = await getDocs(collection(db, "excel-colleges"));
         const options = snapshot.docs.map(doc => ({
           id: doc.id,
           name: doc.data().name,
@@ -232,7 +233,7 @@ const EditModal = ({ selectedStudent, setShowEditModal, isSaving }) => {
   const updateStudentData = async () => {
     setIsSaving(true);
     try {
-      const studentRef = doc(db, "shanmugha", localStudent.id);
+      const studentRef = doc(db, "excel", localStudent.id);
       const updateData = {
         ...localStudent,
         amountPaid: localStudent.rawAmount || 0

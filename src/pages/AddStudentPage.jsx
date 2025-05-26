@@ -117,7 +117,7 @@ const AddStudent = () => {
   useEffect(() => {
     const fetchColleges = async () => {
       try {
-        const snapshot = await getDocs(collection(db, "colleges"));
+        const snapshot = await getDocs(collection(db, "excel-colleges"));
         const options = snapshot.docs.map(doc => ({
           id: doc.id,
           name: doc.data().name,
@@ -155,7 +155,7 @@ const AddStudent = () => {
       return;
     }
 
-    const docSnap = await getDoc(doc(db, "shanmugha", id));
+    const docSnap = await getDoc(doc(db, "excel", id));
     if (docSnap.exists()) {
       const data = docSnap.data();
       setModalMessage({ name: data.candidateName, text: "Student ID already exists." });
@@ -207,7 +207,7 @@ const AddStudent = () => {
     studentData.createdBy = user.uid
 
     try {
-      await setDoc(doc(db, "shanmugha", student.studentId), studentData);
+      await setDoc(doc(db, "excel", student.studentId), studentData);
       setSubmissionStatus("idle");
       setModalMessage({ name: student.candidateName, text: "Student successfully registered!" });
       setIsModalOpen(true);
