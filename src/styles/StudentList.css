@@ -1,0 +1,855 @@
+/* StudentList.css - Clean Minimal Version */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Base Variables */
+:root {
+  /* Color Scheme */
+  --primary-color: #4361ee;
+  --primary-light: #e0e7ff;
+  --secondary-color: #3f37c9;
+  --success-color: #4cc9f0;
+  --danger-color: #f72585;
+  --warning-color: #f8961e;
+  --info-color: #4895ef;
+  --light-color: #f8f9fa;
+  --dark-color: #212529;
+  --gray-color: #6c757d;
+  --white: #ffffff;
+  
+  /* Spacing & Effects */
+  --border-radius: 8px;
+  --border-radius-sm: 4px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --box-shadow-md: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+/* Base Reset & Typography */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  color: var(--dark-color);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Layout Container */
+.student-management {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 80px; 
+}
+
+/* Header Styles */
+.student-management__header {
+  padding: 1.5rem;
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.student-management__title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.header-controls {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.search-container {
+  flex: 1;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #4361ee;
+  box-shadow: 0 0 0 2px #e0e7ff;
+}
+
+.filter-select {
+  padding: 0.75rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  min-width: 180px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #4361ee;
+  box-shadow: 0 0 0 2px #e0e7ff;
+}
+
+
+/* Main Content Area */
+.student-management__content {
+  flex: 1;
+  padding: 1.5rem;
+  padding-bottom: 2rem; 
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+  
+/* Student Cards Grid */
+.student-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1rem; /* Reduced margin */
+  padding-bottom: 1rem; /* Added padding */
+}
+
+.student-card {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.student-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow-md);
+}
+
+.student-card__header {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.student-card__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.student-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.student-card__name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.student-card__course {
+  font-size: 0.875rem;
+  color: var(--gray-color);
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.student-card__status {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.student-card__status--enrolled {
+  background-color: rgba(76, 201, 240, 0.1);
+  color: var(--success-color);
+}
+
+.student-card__status--enquiry {
+  background-color: rgba(248, 149, 34, 0.1);
+  color: var(--warning-color);
+}
+
+.student-card__details {
+  padding: 1.25rem;
+  flex: 1;
+}
+
+.student-card__detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.student-card__detail-row span:first-child {
+  color: var(--gray-color);
+  font-weight: 500;
+}
+
+.student-card__detail-row span:last-child {
+  font-weight: 600;
+  text-align: right;
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.student-card__actions {
+  display: flex;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.student-card__button {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  background: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+}
+
+.student-card__button--edit {
+  color: var(--primary-color);
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.student-card__button--edit:hover {
+  background-color: rgba(67, 97, 238, 0.05);
+}
+
+.student-card__button--view {
+  color: var(--info-color);
+}
+
+.student-card__button--view:hover {
+  background-color: rgba(72, 149, 239, 0.05);
+}
+
+/* Pagination Controls */
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 2rem 0;
+  width: 100%;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.pagination-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  background-color: var(--white);
+  color: var(--dark-color);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+  font-family: 'Poppins', sans-serif;
+  white-space: nowrap; 
+  flex-shrink: 0; 
+}
+
+.pagination-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-button:hover:not(:disabled) {
+  background-color: var(--light-color);
+}
+
+.page-numbers {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.page-button {
+  min-width: 40px;
+  height: 40px;
+  border: 1px solid #ddd;
+  background-color: var(--white);
+  color: var(--dark-color);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.page-button:hover {
+  background-color: var(--light-color);
+}
+
+.page-button.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+
+.page-ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  color: var(--gray-color);
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal__container {
+  position: relative;
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow-md);
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.modal--edit .modal__container {
+  max-width: 900px;
+}
+
+.modal__header {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+.modal__subtitle {
+  font-size: 0.875rem;
+  color: var(--gray-color);
+  margin-top: 0.25rem;
+}
+
+.student-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.student-title__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.modal__close-button {
+  background: none;
+  border: none;
+  color: var(--gray-color);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: var(--transition);
+}
+
+.modal__close-button:hover {
+  color: var(--dark-color);
+  transform: rotate(90deg);
+}
+
+.modal__content {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Form Styles */
+.form-section {
+  margin-bottom: 1.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group__label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+.form-outlined-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  transition: var(--transition);
+}
+
+.form-outlined-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+/* Details Modal Content */
+.details-section {
+  margin-bottom: 2rem;
+}
+
+.details-section__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.details-item {
+  margin-bottom: 1rem;
+}
+
+.details-item__label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--gray-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.25rem;
+}
+
+.details-item__value {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.details-item__value--enrolled {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+.details-item__value--enquiry {
+  color: var(--warning-color);
+  font-weight: 600;
+}
+
+/* Button Styles */
+.button {
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 2px solid transparent;
+  font-family: 'Poppins', sans-serif;
+}
+
+.button--primary {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.button--primary:hover {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.button--outline {
+  background-color: transparent;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.button--outline:hover {
+  background-color: rgba(67, 97, 238, 0.1);
+}
+
+.button__spinner {
+  width: 20px;
+  height: 20px;
+  animation: rotate 1s linear infinite;
+}
+
+.modal__footer {
+  padding: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: flex-end; 
+  gap: 0.75rem;
+}
+
+.modal__footer .button {
+  flex: 0 0 auto;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* State Indicators */
+.loading-state,
+.error-state,
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  text-align: center;
+  padding: 2rem;
+}
+
+.loading-state p,
+.error-state p,
+.empty-state p {
+  margin-top: 1rem;
+  color: var(--gray-color);
+}
+
+.empty-state h3 {
+  margin-top: 1rem;
+  color: var(--dark-color);
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 5px solid #f1f3f5;
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .search-container {
+    width: 250px;
+  }
+  
+  .student-list {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+/* Mobile-first responsive styles */
+@media (max-width: 768px) {
+  /* Header adjustments */
+  .student-management__header {
+    padding: 1rem;
+    padding-bottom: 70px;
+  }
+
+  .header-container {
+    gap: 1rem;
+  }
+
+  .header-controls {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .search-container,
+  .filter-select {
+    width: 100%;
+  }
+
+  /* Student cards */
+  .student-list {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .student-card {
+    border-radius: 12px;
+  }
+
+  .student-card__header {
+    padding: 1rem;
+  }
+
+  .student-card__details {
+    padding: 1rem;
+  }
+
+  .student-card__actions {
+    flex-direction: column;
+  }
+
+  .student-card__button {
+    padding: 0.75rem;
+    justify-content: flex-start;
+  }
+
+  .student-card__button--edit {
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  /* Modal improvements */
+  .modal__container {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    border-radius: 0;
+  }
+
+  .modal__header {
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1;
+  }
+
+  .modal__content {
+    margin: 1rem;
+    padding: 1rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .modal__footer {
+    padding: 1rem;
+    position: sticky;
+    bottom: 0;
+    background: white;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  /* Form improvements */
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .form-outlined-input {
+    padding: 0.875rem 1rem;
+  }
+
+  /* Details view improvements */
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Pagination improvements */
+  .pagination-controls {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    padding-bottom: 1rem;
+  }
+
+  .pagination-button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .page-numbers {
+    flex-wrap: nowrap;
+    margin: 0 0.5rem;
+  }
+
+  .page-button,
+  .page-ellipsis {
+    min-width: 36px;
+    height: 36px;
+    font-size: 0.875rem;
+  }
+  .pagination-wrapper {
+    padding: 0.75rem;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .student-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .student-card__avatar {
+    margin-right: 0;
+  }
+
+  /* Modal content adjustments */
+  .modal__title {
+    font-size: 1.25rem;
+  }
+
+  /* Button sizing */
+  .button {
+    padding: 0.875rem 1rem;
+    width: 100%;
+  }
+
+  /* Form inputs */
+  .form-outlined-input {
+    font-size: 0.9375rem;
+  }
+  .pagination-controls {
+    gap: 0.25rem;
+  }
+
+  .pagination-button {
+    padding: 0.5rem;
+  }
+
+  .page-button,
+  .page-ellipsis {
+    min-width: 32px;
+    height: 32px;
+  }
+}
+
+/* Very small devices (e.g., iPhone SE) */
+@media (max-width: 375px) {
+  .student-management__header {
+    padding: 0.75rem;
+  }
+
+  .student-management__title {
+    font-size: 1.25rem;
+  }
+
+  .student-card {
+    border-radius: 10px;
+  }
+
+  .modal__header {
+    padding: 0.75rem;
+  }
+
+  .modal__content {
+    padding: 0.75rem;
+  }
+}

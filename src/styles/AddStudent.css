@@ -1,0 +1,521 @@
+/* Modern UI Styles with add_student_ prefix */
+.add_student_container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding-bottom: 5rem;
+}
+
+.add_student_header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.add_student_header h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.add_student_header p {
+  color: #718096;
+  font-size: 1rem;
+}
+
+/* Stepper */
+.add_student_stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.add_student_step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.add_student_step_number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.add_student_step.add_student_active .add_student_step_number {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.add_student_step_label {
+  margin-top: 8px;
+  font-size: 0.875rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.add_student_step.add_student_active .add_student_step_label {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.add_student_step_connector {
+  height: 2px;
+  background-color: #e2e8f0;
+  flex-grow: 1;
+  max-width: 100px;
+  margin: 0 -10px;
+}
+
+/* Help Card */
+.help-card {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0 1.5rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.help-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  color: #334155;
+  font-weight: 500;
+}
+
+.help-header svg {
+  margin-right: 0.5rem;
+  color: #4f46e5;
+}
+
+.help-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #64748b;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.help-list li {
+  margin-bottom: 0.25rem;
+}
+
+.help-list strong {
+  color: #334155;
+  font-weight: 500;
+}
+
+/* Form Styles */
+.add_student_form {
+  width: 100%;
+}
+
+.add_student_verify_step {
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.add_student_details_step {
+  width: 100%;
+}
+
+.add_student_form_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.add_student_input_group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.add_student_input_group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4a5568;
+}
+
+.add_student_input_group input,
+.add_student_input_group select {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  transition: all 0.2s ease;
+  background-color: #f8fafc;
+}
+
+.add_student_input_group input:focus,
+.add_student_input_group select:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.add_student_input_group input.add_student_error,
+.add_student_input_group select.add_student_error {
+  border-color: #ef4444;
+}
+
+.add_student_error_message {
+  color: #ef4444;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+/* Buttons */
+.add_student_actions_container {
+  position: relative;
+  width: 100%;
+}
+
+.add_student_form_actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.add_student_primary_btn {
+  padding: 0.75rem 1.5rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.add_student_primary_btn:hover {
+  background-color: #3b7de8;
+}
+
+.add_student_secondary_btn {
+  padding: 0.75rem 1.5rem;
+  background-color: #f1f5f9;
+  color: #6c757d;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add_student_secondary_btn:hover {
+  background-color: #e2e8f0;
+}
+
+/* Spinner */
+.add_student_spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.add_student_modal_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  animation: add_student_fadeIn 0.3s ease-out;
+}
+
+.add_student_modal_content {
+  background-color: white;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transform: translateY(0);
+  animation: add_student_slideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.add_student_modal_header {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%);
+  color: white;
+}
+
+.add_student_modal_icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+}
+
+.add_student_modal_title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+}
+
+.add_student_modal_body {
+  padding: 1.5rem;
+}
+
+.add_student_modal_text {
+  margin: 0;
+  color: #4a5568;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.add_student_modal_footer {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.add_student_modal_button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  background-color: #4f90f8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add_student_modal_button:hover {
+  background-color: #3b82f6;
+  transform: translateY(-1px);
+}
+
+.add_student_modal_button_icon {
+  width: 18px;
+  height: 18px;
+  margin-left: 8px;
+}
+
+/* Animations */
+@keyframes add_student_fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes add_student_slideUp {
+  from { 
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to { 
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+/* Enhanced Mobile Styles */
+@media (max-width: 768px) {
+  .add_student_container {
+    padding: 1.25rem;
+    margin: 0.5rem;
+    padding-bottom: 6rem;
+    border-radius: 12px;
+  }
+
+  .add_student_header h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .add_student_header p {
+    font-size: 0.9rem;
+  }
+
+  .add_student_form_grid {
+    gap: 1rem;
+  }
+
+  .add_student_input_group {
+    gap: 0.4rem;
+  }
+
+  .add_student_input_group input,
+  .add_student_input_group select {
+    padding: 0.65rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  /* Improved Stepper */
+  .add_student_stepper {
+    margin-bottom: 1.75rem;
+  }
+
+  .add_student_step_connector {
+    max-width: 40px;
+    margin: 0 -5px;
+  }
+
+  .add_student_step_number {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+
+  .add_student_step_label {
+    font-size: 0.7rem;
+    margin-top: 4px;
+  }
+
+  /* Better Button Sticky Footer */
+  .add_student_actions_container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+
+  .add_student_form_actions {
+    margin-top: 0;
+    gap: 0.75rem;
+  }
+
+  .add_student_primary_btn,
+  .add_student_secondary_btn {
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+    flex: 1;
+  }
+
+  /* Help Card Improvements */
+  .help-card {
+    padding: 0.8rem;
+    margin: 0.75rem 0 1.25rem;
+  }
+
+  .help-list {
+    font-size: 0.8rem;
+    padding-left: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .add_student_container {
+    padding: 1rem;
+    padding-bottom: 6.5rem;
+  }
+
+  .add_student_header h2 {
+    font-size: 1.3rem;
+  }
+
+  .add_student_header p {
+    font-size: 0.85rem;
+  }
+
+  /* Modal Adjustments */
+  .add_student_modal_content {
+    margin: 0 0.75rem;
+    max-width: calc(100% - 1.5rem);
+  }
+
+  .add_student_modal_header {
+    padding: 1rem;
+  }
+
+  .add_student_modal_title {
+    font-size: 1.1rem;
+  }
+
+  .add_student_modal_body {
+    padding: 1rem;
+  }
+
+  .add_student_modal_text {
+    font-size: 0.9rem;
+  }
+
+  .add_student_modal_footer {
+    padding: 0 1rem 1rem 1rem;
+  }
+
+  .add_student_modal_button {
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Very Small Screens (e.g., iPhone 5/SE) */
+@media (max-width: 320px) {
+  .add_student_container {
+    padding: 0.75rem;
+    padding-bottom: 7rem;
+  }
+
+  .add_student_input_group input,
+  .add_student_input_group select {
+    padding: 0.6rem 0.8rem;
+  }
+
+  .add_student_form_actions {
+    flex-direction: column;
+  }
+
+  .add_student_primary_btn,
+  .add_student_secondary_btn {
+    width: 100%;
+  }
+}
+
+/* Prevent zooming on input focus */
+@media (max-width: 768px) {
+  .add_student_input_group input,
+  .add_student_input_group select,
+  .add_student_input_group textarea {
+    font-size: 16px !important;
+  }
+}

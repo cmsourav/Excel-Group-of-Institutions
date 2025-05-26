@@ -1,0 +1,349 @@
+/* Login.css */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+                 Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+  }
+  
+  .auth-container {
+    display: flex;
+    justify-content: center;
+    background-image: url('https://res.cloudinary.com/da82lkb5h/image/upload/v1744121812/Login_page_desktop_cfeq5u.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: inherit;
+  }
+  
+  .auth-card {
+    background: #ffffffcd;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 380px;
+    padding: 24px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  
+  .auth-card.reset-mode {
+    max-width: 380px;
+  }
+  
+  .auth-card h2 {
+    color: #2d3748;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  .input-field {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+  
+  .input-field .input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0aec0;
+    font-size: 1rem;
+  }
+  
+  .input-field input {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    background-color: #f8fafc;
+    font-family: inherit;
+  }
+  
+  .input-field input:focus {
+    outline: none;
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+  }
+  
+  .primary-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #143F70;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .primary-btn:hover {
+    background-color: #133c6a;
+  }
+  
+  .primary-btn:disabled {
+    background-color: #dae1e4;
+    cursor: not-allowed;
+  }
+  
+  .reset-btn {
+    background-color: #143F70;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    height: 38px;
+  }
+  
+  .password-field {
+    position: relative;
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+    transition: color 0.2s;
+  }
+  
+  .password-toggle:hover {
+    color: #333;
+  }
+  .text-btn {
+    background: none;
+    border: none;
+    color: #143F70;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 5px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+  }
+  
+  .text-btn:hover {
+    text-decoration: underline;
+  }
+  
+  .error-message {
+    color: #e53e3e;
+    background-color: #fff5f5;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+  }
+  
+  .info-message {
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+  }
+  
+  .info-message.success {
+    color: #38a169;
+    background-color: #f0fff4;
+  }
+  
+  .info-message.error {
+    color: #e53e3e;
+    background-color: #fff5f5;
+  }
+  
+  .hint-message {
+    color: #718096;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+  }
+  .status-message {
+    padding: 12px;
+    border-radius: 8px;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.75rem;
+  }
+  
+  .status-message.error {
+    background-color: #fff5f5;
+    color: #e53e3e;
+    border: 1px solid #fed7d7;
+  }
+  
+  .status-message.sent {
+    background-color: #f0fff4;
+    color: #38a169;
+    border: 1px solid #c6f6d5;
+  }
+  
+  .status-message.sending {
+    background-color: #ebf8ff;
+    color: #143F70;
+    border: 1px solid #bee3f8;
+  }
+  
+  .success-icon {
+    color: #38a169;
+  }
+  
+  .error-icon {
+    color: #e53e3e;
+  }
+  
+  .reset-hint {
+    color: #718096;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    justify-content: center;
+  }
+  .spinner {
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  .back-button {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    background: none;
+    border: none;
+    color: #718096;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 5px;
+  }
+  
+  .back-button:hover {
+    color: #2d3748;
+  }
+  
+  .auth-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+  
+  .signup-prompt {
+    margin-top: 1rem;
+    color: #666666;
+    font-size: 0.95rem;
+  }
+  
+  .signup-link {
+    color: #143F70;
+    font-weight: 600;
+    text-decoration: underline;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .signup-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 480px) {
+    .auth-container {
+      padding: 16px;
+      align-items: center;
+      background-image: url('https://res.cloudinary.com/da82lkb5h/image/upload/v1744122437/Shanmugha_User_login_Phone_View_lr9ebk.jpg');
+    }
+  
+    .auth-card {
+      padding: 25px 20px;
+      border-radius: 10px;
+    }
+  
+    .auth-card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+  
+    .input-field input {
+      padding: 10px 12px 10px 40px;
+      font-size: 0.95rem;
+    }
+  
+    .input-field .input-icon {
+      font-size: 0.9rem;
+      left: 12px;
+    }
+  
+    .primary-btn {
+      padding: 10px;
+      font-size: 0.95rem;
+    }
+  
+    .text-btn, .signup-prompt {
+      font-size: 0.85rem;
+    }
+  
+    .error-message, .info-message, .hint-message {
+      font-size: 0.85rem;
+      padding: 8px 12px;
+    }
+  
+    .back-button {
+      position: absolute;
+      top: 20px;
+    }
+  }
+  
+  @media (max-width: 360px) {
+    .auth-card {
+      padding: 20px 15px;
+    }
+  
+    .auth-card h2 {
+      font-size: 1.2rem;
+    }
+  
+    .input-field input {
+      padding: 8px 10px 8px 36px;
+    }
+  
+    .signup-prompt {
+      display: block;
+      gap: 5px;
+    }
+    .reset-hint {
+      display: block;
+      font-size: 0.75rem;
+    }
+  }
