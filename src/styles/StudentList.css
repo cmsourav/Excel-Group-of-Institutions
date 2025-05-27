@@ -359,6 +359,19 @@ h1, h2, h3, h4 {
   color: var(--gray-color);
 }
 
+.button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.button--primary svg {
+  stroke: white;
+}
+
+.button--outline svg {
+  stroke: var(--primary-color);
+}
+
 /* Modal Styles */
 .modal {
   position: fixed;

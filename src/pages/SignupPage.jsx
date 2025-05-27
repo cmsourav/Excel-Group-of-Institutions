@@ -185,7 +185,7 @@ const SignupPage = () => {
       <div className="signup-wrapper">
         <div className="signup-left">
           <img
-            src="https://res.cloudinary.com/da82lkb5h/image/upload/v1744143245/signup_mwrkx0.jpg"
+            src="https://res.cloudinary.com/da82lkb5h/image/upload/v1748347196/Reg_Form_Excel_vx7cfx.jpg"
             alt="Visual"
             className="signup-full-image"
           />

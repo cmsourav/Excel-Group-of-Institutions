@@ -10,7 +10,7 @@ body {
   .auth-container {
     display: flex;
     justify-content: center;
-    background-image: url('https://res.cloudinary.com/da82lkb5h/image/upload/v1744121812/Login_page_desktop_cfeq5u.jpg');
+    background-image: url('https://res.cloudinary.com/da82lkb5h/image/upload/v1748347048/EXCEL_LOGIN_PAGE_if0pm4.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -254,7 +254,7 @@ body {
   }
   
   .auth-footer {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     text-align: center;
   }
   
@@ -282,7 +282,7 @@ body {
     .auth-container {
       padding: 16px;
       align-items: center;
-      background-image: url('https://res.cloudinary.com/da82lkb5h/image/upload/v1744122437/Shanmugha_User_login_Phone_View_lr9ebk.jpg');
+      background-image: url('https://res.cloudinary.com/da82lkb5h/image/upload/v1748347116/Phone_View_1_knbzv6.jpg');
     }
   
     .auth-card {
