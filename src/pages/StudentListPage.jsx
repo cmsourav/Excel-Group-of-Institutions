@@ -861,7 +861,7 @@ const generatePDF = async (student) => {
     doc.text("Generated on " + new Date().toLocaleString(), margin, y);
 
     // Save PDF
-    const fileName = `Student_Application_${(student.candidateName || 'student').replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
+    const fileName = `${(student.candidateName || 'student').replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
     doc.save(fileName);
 
   } catch (error) {
