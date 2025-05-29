@@ -12,6 +12,7 @@ import { auth, db } from "../firebase";
 import "../styles/StudentList.css";
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import collegeLogo from '../assets/sidebar-logo.png'
 
 const StudentList = () => {
   // State variables
@@ -664,240 +665,210 @@ const StudentList = () => {
 
 const generatePDF = async (student) => {
   try {
-      const doc = new jsPDF({
-        unit: 'mm',
-        format: 'a4',
-        putOnlyUsedFonts: true,
-        hotfixes: ['px_scaling']
-      });
+    const doc = new jsPDF({
+      unit: 'mm',
+      format: 'a4',
+      putOnlyUsedFonts: true,
+      hotfixes: ['px_scaling']
+    });
 
-      // Design Constants with Red/Black Theme
-      const pageWidth = doc.internal.pageSize.getWidth();
-      const pageHeight = doc.internal.pageSize.getHeight();
-      const margin = 10;
-      const contentWidth = pageWidth - margin * 2;
-      const columnGap = 10;
+    // Design Constants
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const margin = 20;
+    const contentWidth = pageWidth - margin * 2;
+    const columnGap = 12;
 
-      // Red and Black Color Scheme
-      const colors = {
-        primary: '#D32F2F',    // Dark Red
-        secondary: '#212121',  // Dark Black
-        accent: '#F44336',     // Bright Red
-        lightBg: '#FFEBEE',    // Light Red Background
-        textDark: '#212121',   // Black Text
-        textMedium: '#616161'  // Gray Text
-      };
+    // Professional Color Scheme
+    const colors = {
+      primary: '#2c3e50',    // Dark blue
+      secondary: '#7f8c8d',  // Gray
+      accent: '#3498db',     // Light blue
+      textDark: '#2c3e50',   // Dark text
+      textMedium: '#34495e', // Medium text
+      textLight: '#95a5a6'   // Light text
+    };
 
-      // Typography
-      const fonts = {
-        normal: 'helvetica',
-        bold: 'helvetica-bold',
-        title: 'helvetica-bold'
-      };
+    // Typography
+    const fonts = {
+      normal: 'helvetica',
+      bold: 'helvetica-bold',
+      title: 'helvetica-bold'
+    };
 
-      let y = margin;
+    let y = margin;
 
-      // Add Header with Company Logo
-      const addHeader = () => {
-        // Red Accent Bar
-        doc.setFillColor(colors.primary);
-        doc.rect(0, 0, pageWidth, 8, 'F');
+    // Format date
+    const formatDate = (dateString) => {
+      try {
+        return new Date(dateString).toLocaleDateString('en-IN');
+      } catch {
+        return 'N/A';
+      }
+    };
 
-        try {
-          const logoWidth = 40;
-          const logoHeight = 20;
-          doc.addImage(logo, 'PNG', margin, y, logoWidth, logoHeight);
-          y += logoHeight;
-        } catch (e) {
-          // Fallback text if logo fails
-          doc.setFont(fonts.title);
-          doc.setFontSize(20);
-          doc.setTextColor(colors.primary);
-          doc.text('KM FOUNDATION', margin, y + 15);
-          y += 20;
-        }
+    // Add Professional Header with Logo
+    const addHeader = async () => {
+      // Logo configuration
+      const logoWidth = 50; 
+      const logoHeight = 20; 
+      const logoX = margin;
+      const logoY = y;
+      
+      try {
+        doc.addImage(collegeLogo, 'PNG', logoX, logoY, logoWidth, logoHeight);
+      } catch (error) {
+        console.warn('Could not load logo:', error);
+        // Fallback: Draw a placeholder rectangle
+        doc.setFillColor(colors.secondary);
+        doc.rect(logoX, logoY, logoWidth, logoHeight, 'F');
+        doc.setFontSize(8);
+        doc.setTextColor('#ffffff');
+        doc.text('LOGO', logoX + logoWidth/2, logoY + logoHeight/2, { align: 'center' });
+      }
 
-        // Document Title
-        doc.setFont(fonts.title);
-        doc.setFontSize(16);
-        doc.setTextColor(colors.secondary);
-        doc.text('APPLICATION FORM', pageWidth / 2, y + 5, { align: 'center' });
+      // Title and subtitle positioned to the right of the logo
+      const textX = logoX + logoWidth + 10;
+      
+      // Title
+      doc.setFont(fonts.title);
+      doc.setFontSize(18);
+      doc.setTextColor(colors.primary);
+      doc.text("Application Form", pageWidth / 2, y + logoHeight/3, { align: 'center' });
+      
+      // Subtitle
+      doc.setFont(fonts.normal);
+      doc.setFontSize(10);
+      doc.setTextColor(colors.textMedium);
+      doc.text("Official Document | " + new Date().toLocaleDateString(), pageWidth / 2, y + logoHeight/3 + 8, { align: 'center' });
 
-        y += 10;
-      };
+      y += logoHeight + 15;
 
-      // const addHeader = () => {
-      //   doc.setFont('helvetica', 'bold');
-      // doc.setFontSize(16);
-      // doc.text('Educational Consultancy Application', 105, 20, { align: 'center' });
-
-      // // Subtitle
-      // doc.setFontSize(11);
-      // doc.setFont('helvetica', 'normal');
-      // doc.text('Academic Year: 2025-26', 105, 28, { align: 'center' });
-
-      // // Horizontal line
-      // doc.setLineWidth(0.5);
-      // doc.line(10, 32, 200, 32)
-
-      // y += 20;
-      // }
-
-      // Dynamic field height calculator
-      const calculateFieldHeight = (text, maxWidth) => {
-        const lines = doc.splitTextToSize(text || '-', maxWidth);
-        return Math.max(1, lines.length) * 3;
-      };
-
-      // Section with Red/Black styling
-      const addSection = (title, fields) => {
-        // Check page space
-        if (y > pageHeight - 50) {
-          doc.addPage();
-          y = margin;
-        }
-
-        // Section Title with Red accent
-        doc.setFont(fonts.bold);
-        doc.setFontSize(12);
-        doc.setTextColor(colors.primary);
-        doc.text(title.toUpperCase(), margin, y + 5);
-
-        // Black underline
-        doc.setDrawColor(colors.secondary);
-        doc.line(margin, y + 7, margin + 40, y + 7);
-
-        y += 15;
-
-        addDynamicFields(fields);
-        y += 10;
-      };
-
-      // Dynamic fields with proper spacing
-      const addDynamicFields = (fields) => {
-        const columnWidth = (contentWidth - columnGap) / 2;
-        let currentY = y;
-        let maxHeight = 0;
-
-        for (let i = 0; i < fields.length; i++) {
-          const field = fields[i];
-          if (!field) continue;
-
-          const [label, value] = field;
-          const xPos = i % 2 === 0 ? margin : margin + columnWidth + columnGap;
-          const isNewRow = i % 2 === 0;
-
-          if (isNewRow && i > 0) {
-            currentY += maxHeight + 8;
-            maxHeight = 0;
-          }
-
-          const labelHeight = calculateFieldHeight(label, columnWidth * 0.4);
-          const valueHeight = calculateFieldHeight(value, columnWidth * 0.6);
-          const fieldHeight = Math.max(labelHeight, valueHeight);
-
-          // Page break check
-          if (currentY + fieldHeight > pageHeight - 20) {
-            doc.addPage();
-            currentY = margin;
-            maxHeight = 0;
-          }
-
-          // Draw field - Black labels
-          doc.setFont(fonts.bold);
-          doc.setFontSize(9);
-          doc.setTextColor(colors.secondary);
-          doc.text(label + ':', xPos, currentY + 5);
-
-          // Red values
-          doc.setFont(fonts.normal);
-          doc.setTextColor(colors.secondary);
-          const valueLines = doc.splitTextToSize(value || '-', columnWidth * 0.6);
-          doc.text(valueLines, xPos + 30, currentY + 5);
-
-          maxHeight = Math.max(maxHeight, fieldHeight);
-        }
-
-        y = currentY + maxHeight;
-      };
-
-      // Format date
-      const formatDate = (dateString) => {
-        try {
-          return new Date(dateString).toLocaleDateString('en-IN');
-        } catch {
-          return 'N/A';
-        }
-      };
-
-      // ----------------- PDF GENERATION -----------------
-      // addHeader();
-
-      // ENROLLMENT Details
-      addSection('ENROLLMENT DETAILS', [
-        ['Name', student.candidateName],
-        ['Contact Number', student.candidateNumber],
-        ['Email', student.candidateEmail],
-        ['WhatsApp Number', student.whatsappNumber],
-        ["Parent's Contact", student.parentNumber],
-        ['Aadhar Number', student.adhaarNumber],
-        ['Course Program', student.course],
-        ['College/University', student.college],
-      ]);
-
-      // Personal Details
-      addSection('PERSONAL DETAILS', [
-        ['Date of Birth', formatDate(student.dob)],
-        ['Gender', student.gender],
-        ["Father's Name", student.fatherName],
-        ["Father's Contact", student.parentNumber],
-        ["Mother's Name", student.motherName],
-        ["Mother's Contact", student.alternativeNumber],
-        ['Religion', student.religion],
-        ['Address', student.address],
-        ['State', student.state],
-        ['District', student.district],
-        ['PIN Code', student.pincode]
-      ]);
-
-      // Academic Information
-      addSection('ACADEMIC DETAILS', [
-        ['Highest Qualification', student.lastQualification],
-        ['Percentage/Grade', student.lastQualificationMarks],
-        ['+2 Registration No', student.plusTwoRegNumber],
-         ['+2 Stream', student.stream],
-        ['+2 School/College', student.plusTwoSchoolName],
-        ['School Location', student.plusTwoSchoolPlace]
-      ]);
-
-      // Family Information
-      addSection('Family Details', [
-        ["Father's Name", student.fatherName],
-        ["Father's Contact", student.parentNumber],
-        ["Mother's Name", student.motherName],
-        ["Mother's Contact", student.alternativeNumber],
-        ['Religion', student.religion]
-      ]);
-
-      // Footer with Red/Black styling
-      y = Math.max(y, pageHeight - 20);
-      doc.setDrawColor(colors.primary);
+      // Horizontal line
+      doc.setDrawColor(colors.secondary);
+      doc.setLineWidth(0.5);
       doc.line(margin, y, pageWidth - margin, y);
+      y += 15;
+    };
 
-      doc.setFontSize(9);
-      doc.setTextColor(colors.secondary);
-      doc.text('© KM Foundation', pageWidth - margin, y + 10, { align: 'right' });
+    // Calculate field height
+    const calculateFieldHeight = (text, maxWidth) => {
+      const lines = doc.splitTextToSize(text || '-', maxWidth);
+      return Math.max(1, lines.length) * 5;
+    };
 
-      // Save PDF
-      const fileName = `${(student.candidateName || 'Application').replace(/[^a-zA-Z0-9-]/g, '_')}_Form.pdf`;
-      doc.save(fileName);
+    // Professional section styling
+    const addSection = (title, fields) => {
+      // Check page space
+      if (y > pageHeight - 50) {
+        doc.addPage();
+        y = margin;
+      }
 
-    } catch (error) {
-      console.error('PDF Generation Error:', error);
-      alert('Failed to generate PDF. Please try again.');
-    }
-  };
+      // Section Title
+      doc.setFont(fonts.bold);
+      doc.setFontSize(13);
+      doc.setTextColor(colors.primary);
+      doc.text(title, margin, y);
 
+      // Small accent line
+      doc.setDrawColor(colors.textLight);
+      doc.setLineWidth(.5);
+      doc.line(margin, y + 2, margin + 30, y + 2);
+
+      y += 10;
+
+      addDynamicFields(fields);
+      y += 10;
+    };
+
+    // Clean field layout
+    const addDynamicFields = (fields) => {
+      const columnWidth = (contentWidth - columnGap) / 2;
+      let currentY = y;
+      let maxHeight = 0;
+
+      for (let i = 0; i < fields.length; i++) {
+        const field = fields[i];
+        if (!field) continue;
+
+        const [label, value] = field;
+        const xPos = i % 2 === 0 ? margin : margin + columnWidth + columnGap;
+        const isNewRow = i % 2 === 0;
+
+        if (isNewRow && i > 0) {
+          currentY += maxHeight + 8;
+          maxHeight = 0;
+        }
+
+        const labelHeight = calculateFieldHeight(label, columnWidth * 0.4);
+        const valueHeight = calculateFieldHeight(value, columnWidth * 0.6);
+        const fieldHeight = Math.max(labelHeight, valueHeight);
+
+        // Page break check
+        if (currentY + fieldHeight > pageHeight - 20) {
+          doc.addPage();
+          currentY = margin;
+          maxHeight = 0;
+        }
+
+        // Label
+        doc.setFont(fonts.bold);
+        doc.setFontSize(9);
+        doc.setTextColor(colors.textDark);
+        doc.text(label + ':', xPos, currentY + 4);
+
+        // Value
+        doc.setFont(fonts.normal);
+        doc.setFontSize(9);
+        doc.setTextColor(colors.textMedium);
+        const valueLines = doc.splitTextToSize(value || '-', columnWidth * 0.6);
+        doc.text(valueLines, xPos + 35, currentY + 4);
+
+        maxHeight = Math.max(maxHeight, fieldHeight);
+      }
+
+      y = currentY + maxHeight;
+    };
+
+    // ----------------- PDF GENERATION -----------------
+    await addHeader(); // Now async because of potential logo loading
+
+    // Student Information (original fields only)
+    addSection('Student Details', [
+      ['Application Status', student.applicationStatus+'ed' || 'N/A'],
+      ['Full Name', student.candidateName || 'N/A'],
+      ['Student ID', student.studentId || 'N/A'],
+      ['Date of Birth', formatDate(student.dob)],
+      ['Gender', student.gender || 'N/A'],
+      ["Father's Name", student.fatherName || 'N/A'],
+      ["Parent's Contact", student.parentNumber || 'N/A'],
+      ['Aadhar Number', student.adhaarNumber || 'N/A'],
+      ['Contact Number', student.candidateNumber || 'N/A'],
+      ['Place', student.place || 'N/A']
+    ]);
+
+    // Academic Information (original fields only)
+    addSection('Academic Details', [
+      ['Course Program', student.course || 'N/A'],
+      ['College/University', student.college || 'N/A'],
+    ]);
+
+    // Minimal Footer
+    y = Math.max(y, pageHeight - 15);
+    doc.setFontSize(8);
+    doc.setTextColor(colors.textLight);
+    doc.text("Generated on " + new Date().toLocaleString(), margin, y);
+
+    // Save PDF
+    const fileName = `Student_Application_${(student.candidateName || 'student').replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
+    doc.save(fileName);
+
+  } catch (error) {
+    console.error('PDF Generation Error:', error);
+    alert('Failed to generate PDF. Please try again.');
+  }
+};
 
   return (
     <div className="student-management">
